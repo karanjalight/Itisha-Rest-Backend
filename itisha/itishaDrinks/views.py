@@ -29,4 +29,3 @@ class DrinkViewSet(viewsets.ModelViewSet):
     """
     queryset = itisha_drinks.objects.all()
     serializer_class = drinks
-    permission_classes = [permissions.IsAuthenticated]

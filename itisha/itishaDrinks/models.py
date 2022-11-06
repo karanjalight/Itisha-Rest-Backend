@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 # Create your models here.\
@@ -15,19 +16,28 @@ class drink_shop(models.Model):
     return str(self.shop_name)
 
 
-
 class itisha_drinks(models.Model):
-  drink_id = models.IntegerField(null=False)
-  drink_name = models.CharField(max_length=250, null=False, blank=False)
-  drink_type = models.CharField(max_length=250, null=False, blank=False)
+  drink_slug = models.CharField(max_length=250, primary_key=True, null=False, help_text = "the names of the product SHOULD be unique to every product.")  #this is a slugify design to map web pages amd identify products
+  drink_type = models.CharField(max_length=250, null=False, blank=False, help_text = "this is the drink category, either alcohol, Energy drink, juice ...")
+  drink_name = models.CharField(max_length=250, null=False, blank=False, help_text = "Can be same to drink slug, (but not every time)")  
   drink_qty = models.CharField(max_length=250, null=False, blank=False)
   drink_price = models.IntegerField()
   drink_description = models.CharField(max_length=250, null=False, blank=False)
-  #shop = models.CharField(max_length=250, null=False, blank=False)  
-  shops = models.ForeignKey(drink_shop, on_delete=models.CASCADE)
+  top_rated =models.BooleanField(default=False, help_text = "categorised under the top rated category")
+  recommended =models.BooleanField(default=False, help_text = " recommencded to other users")
+  offers =models.BooleanField(default=False, help_text = " categorised as 15% off")
+  
+  
 
   def __str__(self):
     return self.drink_name
+
+
+
+
+###
+
+
 
 
   
