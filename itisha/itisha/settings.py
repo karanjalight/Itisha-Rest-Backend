@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'itishaDrinks',
+    'todo',
     'rest_framework',
 ]
 

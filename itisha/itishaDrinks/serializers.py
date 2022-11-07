@@ -15,7 +15,12 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
-class drinks(serializers.HyperlinkedModelSerializer):
+class drinksSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = itisha_drinks
-        fields = ['drink_id', 'drink_name', 'drink_type', 'drink_qty', 'drink_price', 'drink_description']
+        fields = ['drink_slug', 'drink_name', 'drink_type', 'drink_qty', 'drink_price', 'drink_description' ,'top_rated', 'recommended', 'offers']
+
+class alcoholSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = alcohol_drinks
+        fields = ['drink_slug','drink_type', 'drink_name', 'drink_qty', 'drink_price', 'drink_description', 'top_rated', 'recommended', 'offers']

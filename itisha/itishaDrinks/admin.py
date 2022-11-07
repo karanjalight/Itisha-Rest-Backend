@@ -5,3 +5,5 @@ from .models import *
 
 admin.site.register(itisha_drinks)
 admin.site.register(drink_shop)
+admin.site.register( alcohol_drinks )
+
