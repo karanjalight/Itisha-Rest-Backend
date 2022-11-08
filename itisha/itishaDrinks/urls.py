@@ -7,7 +7,7 @@ urlpatterns = [
 
     #list views
     path('mzinga/', views.mzingaList, name='mzinga-list'),
-    path('drinks/', views.drinkList, name='mzinga-list'),
+    path('drink/', views.drinkList, name='mzinga-list'),
 
     #detail views
     path('mzinga/<str:slug>/', views.mzingaDetail, name='mzinga-details'),
@@ -18,8 +18,10 @@ urlpatterns = [
     path('drink-create/', views.drinkCreate, name='drink-create'),
 
     #update
-    path('drink-update/<str:slug>/', views.drinkUpdate, name='mzinga-update'),
+    path('mzinga-update/<str:slug>/', views.mzingaUpdate, name='mzinga-update'),
+    path('drink-update/<str:slug>/', views.drinkUpdate, name='drink-update'),
 
     #delete
     path('mzinga-delete/<str:drink_slug>/', views.mzingaDelete, name='mzinga-delete'),
+    path('drink-delete/<str:drink_slug>/', views.drinkDelete, name='drinks-delete'),
 ]

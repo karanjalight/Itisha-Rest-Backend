@@ -19,10 +19,23 @@ from .serializers import *
 def apiOverview(request):
 
     api_urls = {
+        #CREATE
+        'mzinga-create': 'mzinga-create/',
+        'drink-create': 'drink-create/',
+        
+        #READ
         'Mzinga': '/mzinga/',
         'Drinks': '/drinks/',
         'MzingaDetailView': 'mzinga/<str:slug>/',
         'DrinksDetailView': 'drinks/<str:pk>/',
+
+        #UPDATE
+        'drink-update': 'drink-update/<str:slug>/',
+        'mzinga-update': 'mzinga-update/<str:slug',
+        
+        #DELETE
+        'mzinga-delete': 'mzinga-delete/<str:drink_slug>/',
+        'drink-delete': 'drink-delete/<str:drink_slug>/'
     }
     return Response(api_urls)
 
@@ -57,15 +70,16 @@ def mzingaCreate(request):
              serializer.save()
              return Response(serializer.data)
         else:
-            return Response(serializer.errors)
+            return Response(serializer.data)
 
 
         
 
 # Mzinga update    🍺🍺🍺🍻🍻
-@api_view([ 'POST' ])
+@api_view([ 'UPDATE' ])
 def mzingaUpdate(request, slug):
    mzinga = alcohol_drinks.objects.get(drink_slug=slug)
+   print(mzinga)
    
    if request.method == 'POST':
     serializer = alcoholSerializer( instance=mzinga, data=request.data)
@@ -96,6 +110,7 @@ def mzingaDelete(request, drink_slug):
 
 #====================================== DRINKS ======================================#
 
+
 # Mzinga list view 🍺🍺🍺🍻🍻
 @api_view([ 'GET' ])
 def drinkList(request):
@@ -116,17 +131,19 @@ def drinkDetail(request, slug):
 # Mzinga create    🍺🍺🍺🍻🍻
 @api_view([ 'POST' ])
 def drinkCreate(request):
-   
-   serializer = drinksSerializer
+    if request.method == 'POST':
+        serializer = drinksSerializer(data= request.data)
 
-   if serializer.is_valid():
-        serializer.save()
+        if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data)
+        else:
+            return Response(serializer.data)
 
-   return Response(serializer.data)
 
 
 # Mzinga update    🍺🍺🍺🍻🍻
-@api_view([ 'POST' ])
+@api_view([ 'UPDATE' ])
 def drinkUpdate(request, slug):
    mzinga = itisha_drinks.objects.get(drink_slug=slug)
    serializer = drinksSerializer( instance=mzinga, data=request.data)
@@ -154,7 +171,7 @@ def drinkDelete(request, drink_slug):
 
 
 
-
+#====================================== AUTHENTIFICATION FOR USERS ======================================#
 
 class UserViewSet(viewsets.ModelViewSet):
     """
