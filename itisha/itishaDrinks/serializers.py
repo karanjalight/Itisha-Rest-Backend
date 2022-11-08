@@ -24,3 +24,4 @@ class alcoholSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = alcohol_drinks
         fields = ['drink_slug','drink_type', 'drink_name', 'drink_qty', 'drink_price', 'drink_description', 'top_rated', 'recommended', 'offers']
+        # fields = '__all__'        this is another method

@@ -5,6 +5,7 @@ from todo.views import *
 from itishaDrinks.views import *
 
 from django.contrib import admin
+from itishaDrinks import urls
 
 
 router = routers.DefaultRouter()
@@ -19,12 +20,27 @@ router.register(r'alcohol', views.AlcoholViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     
-    path('api/', TodoListApiView.as_view(), name= "list"),          #the last time for real  😂😂
-    path('alcohol', alcoholApiView.as_view(), name= "mzinga"),      #this view supports alcoholic drinks since they have a wider variety
-    path('drinks', alcoholApiView.as_view(), name= "drinks"),       #this view supports drinks like sodas, yorghurt, energy drinks, coktails and other soft drinks with the similar
+            
+
+    path('', include('itishaDrinks.urls')), #the last time for real  😂😂
+
+
+
+
+
+
+    #👉 This here is the list view for our products
+         #this view supports drinks like sodas, yorghurt, energy drinks, coktails and other soft drinks with the similar
+
+
+
+    #👉 This here is the list view for our products
+    #path('mzinga/<str:slug>', alcoholDetailApiView.as_view(), name= "drinks"),
+    #path('drinks/<str:slug>', drinkDetailApiView.as_view(), name= "drinks"),
+    
 
 
 
